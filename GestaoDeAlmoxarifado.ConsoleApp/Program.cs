@@ -5,15 +5,17 @@ using GestaoDeAlmoxarifado.ConsoleApp.ModuloFabricante;
 
 class Program
 {
+    public TelaFabricante TelaFabricantee = new TelaFabricante();
     static void Main(string[] args)
     {
-        TelaEquipamento telaEquipamento = new TelaEquipamento();
+        TelaFabricante telaFabricante = new TelaFabricante();
+
+        TelaEquipamento telaEquipamento = new TelaEquipamento(telaFabricante.repositorioFabricante);
 
         RepositorioEquipamento repositorioEquipamento = telaEquipamento.repositorioEquipamento;
 
         TelaChamado telaChamado = new TelaChamado(repositorioEquipamento);
 
-        TelaFabricante telaFabricante = new TelaFabricante();
 
 
         TelaPrincipal telaPrincipal = new TelaPrincipal();
@@ -75,8 +77,11 @@ class Program
 
                     default: break;
                 }
+
             }
 
+
+            telaEquipamento.fabricantess(telaFabricante);
             Console.ReadLine();
         }
 

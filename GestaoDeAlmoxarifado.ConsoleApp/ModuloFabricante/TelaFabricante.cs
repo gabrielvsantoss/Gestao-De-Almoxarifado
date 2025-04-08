@@ -5,6 +5,7 @@ namespace GestaoDeAlmoxarifado.ConsoleApp.ModuloFabricante
     public class TelaFabricante
     {
         public RepositorioFabricante repositorioFabricante;
+        public Fabricante[] fabricantesCadastrados = new Fabricante[200];
 
         public TelaFabricante()
         {
@@ -143,7 +144,7 @@ namespace GestaoDeAlmoxarifado.ConsoleApp.ModuloFabricante
                  "Id", "Nome", "Email", "Telefone"
             );
 
-            Fabricante[] fabricantesCadastrados = repositorioFabricante.SelecionarFabricantes();
+             fabricantesCadastrados = repositorioFabricante.SelecionarFabricantes();
 
             for (int i = 0; i < fabricantesCadastrados.Length; i++)
             {

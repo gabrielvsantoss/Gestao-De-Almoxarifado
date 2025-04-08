@@ -1,12 +1,22 @@
-﻿namespace GestaoDeAlmoxarifado.ConsoleApp.ModuloEquipamento;
+﻿using GestaoDeAlmoxarifado.ConsoleApp.ModuloFabricante;
+
+namespace GestaoDeAlmoxarifado.ConsoleApp.ModuloEquipamento;
 
 public class TelaEquipamento
 {
     public RepositorioEquipamento repositorioEquipamento;
+    public RepositorioFabricante repositorioFabricante;
+    public TelaFabricante Tela = new TelaFabricante();
 
-    public TelaEquipamento()
+    public TelaEquipamento(RepositorioFabricante RepositorioFabricante)
     {
         repositorioEquipamento = new RepositorioEquipamento();
+        repositorioFabricante = RepositorioFabricante;
+    }
+
+    public void fabricantess(TelaFabricante tela)
+    {
+        Tela = tela;
     }
 
     public char ApresentarMenu()
@@ -39,14 +49,57 @@ public class TelaEquipamento
         Console.WriteLine("Cadastrando Equipamento...");
         Console.WriteLine("--------------------------------------------");
 
-        Console.WriteLine();
 
         Console.Write("Digite o nome do equipamento: ");
         string nome = Console.ReadLine();
 
-        Console.Write("Digite o nome do fabricante equipamento: ");
-        string fabricante = Console.ReadLine();
+     
 
+
+        Console.WriteLine(
+            "{0, -10} | {1, -25} | {2, -25} | {3, -25} |",
+        "Id", "Nome", "Email", "Telefone"
+        );
+
+
+        Fabricante[] fabricantesCadastrados = repositorioFabricante.fabricantes;
+
+
+        for (int i = 0; i < fabricantesCadastrados.Length; i++)
+        {
+             Fabricante e = fabricantesCadastrados[i];
+
+            if (e == null) continue;
+
+            Console.WriteLine(
+               "{0, -10} | {1, -25} | {2, -25} | {3, -25} |",
+                e.Id, e.Nome, e.Email, e.Telefone
+            );
+        }
+
+        Console.WriteLine("--------------------------------------------------------------");
+        Console.WriteLine("Digite o id do Fabricante que deseja colocar nesse Equipamento");
+        int idFabricante = Convert.ToInt32(Console.ReadLine());
+        bool idAchado = false;
+        string fabricante = "";
+
+        while (idAchado == false)
+        {
+
+            for (int i = 0; i <= fabricantesCadastrados.Length; i++)
+            {
+                if (idFabricante == fabricantesCadastrados[i].Id)
+                {
+                    fabricante = fabricantesCadastrados[i].Nome;
+                    idAchado = true;
+                }
+            }
+
+            if (idAchado == false)
+                Console.WriteLine("id digitado é invalido| Clique ENTER para tentar novamente |");
+                Console.ReadLine();
+                continue;
+        }
         Console.Write("Digite o preço de aquisição R$ ");
         decimal precoAquisicao = Convert.ToDecimal(Console.ReadLine());
 
@@ -76,10 +129,10 @@ public class TelaEquipamento
         Console.WriteLine();
 
         Console.Write("Digite o nome do equipamento: ");
-        string nome = Console.ReadLine();
+        string nome = Console.ReadLine()!;
 
         Console.Write("Digite o nome do fabricante equipamento: ");
-        string fabricante = Console.ReadLine();
+        string fabricante = Console.ReadLine()!;
 
         Console.Write("Digite o preço de aquisição R$ ");
         decimal precoAquisicao = Convert.ToDecimal(Console.ReadLine());
