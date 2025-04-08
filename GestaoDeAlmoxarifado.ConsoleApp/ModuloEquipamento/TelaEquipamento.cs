@@ -13,12 +13,6 @@ public class TelaEquipamento
         repositorioEquipamento = new RepositorioEquipamento();
         repositorioFabricante = RepositorioFabricante;
     }
-
-    public void fabricantess(TelaFabricante tela)
-    {
-        Tela = tela;
-    }
-
     public char ApresentarMenu()
     {
         Console.Clear();

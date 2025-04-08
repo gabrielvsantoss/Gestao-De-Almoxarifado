@@ -81,7 +81,6 @@ class Program
             }
 
 
-            telaEquipamento.fabricantess(telaFabricante);
             Console.ReadLine();
         }
 
